@@ -1,22 +1,27 @@
 <script>
-    let film = 'The Godfather'
+    import { FilmStore } from '../../films-stores.js';
+
+
+    let handleClick = ()=> FilmStore.update(prev =>   {
+        let newFilm = {
+            id: 3,
+            title: `drive`,
+            description: "Nick"
+        }
+        return[...prev, newFilm]
+
+    })
 </script>
 
-<!-- <h1>{film.toUpperCase()}</h1>
+<ul> 
+    {#each $FilmStore as film}
+    <li>
+        <a href="films/{film.id}">{film.title}</a>
+    </li>
+    {/each}
+</ul>
 
-<style>
-    h1 {
-        font-size: 40px;
-        color: purple;
-        position: center;
-        text-align: center;
-        margin-top: 100px;
 
-    }
- </style>    -->
-
-{#if film.startsWith('f')}
-    <p>It starts with 'T'</p>
-{:else}
-    <p>It doesn't start with 'T'</p>
-{/if}
+<button type ="button" on:click = {handleClick}>
+    Add a Film
+</button>
